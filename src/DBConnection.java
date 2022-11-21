@@ -22,11 +22,14 @@ public class DBConnection {
         connectionProps.put("password", password);
         String urlDB = "jdbc:mysql://" + serverName + ":";
         urlDB += portNumber + "/" + dbName;
-        Connection instance = DriverManager.getConnection(urlDB, connectionProps);
+        instance = DriverManager.getConnection(urlDB, connectionProps);
     }
     public static synchronized Connection getConnection() throws SQLException {
-        if(instance==null)
-            new DBConnection();
-        return instance;
+        if(instance==null) new DBConnection();
+            return instance;
+    }
+
+    public static synchronized void setNomDB(String NomDB) {
+        
     }
 }
