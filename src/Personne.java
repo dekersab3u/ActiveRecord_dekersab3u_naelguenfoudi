@@ -13,6 +13,11 @@ public class Personne {
         this.id=-1;
         connect=DBConnection.getConnection();
     }
+
+    public int getId() {
+        return id;
+    }
+
     public ArrayList<Personne> findAll() throws SQLException {
         ArrayList<Personne> listPersonne=new ArrayList<>();
         String SQLPrep = "SELECT * FROM Personne;";
