@@ -12,7 +12,7 @@ public class DBConnection {
     private String tableName = "testpersonne";
 
     // iL faut une base nommee testPersonne !
-    private String dbName = "testpersonne";
+    private static String dbName = "testpersonne";
     private static Connection instance;
 
 
@@ -29,7 +29,10 @@ public class DBConnection {
             return instance;
     }
 
-    public static synchronized void setNomDB(String NomDB) {
-        
-    }
+    public static synchronized void setNomDB(String nomDB) throws SQLException {
+        if(nomDB!=null){
+            dbName=nomDB;
+            new DBConnection();
+        }
+            }
 }
