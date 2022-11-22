@@ -11,7 +11,7 @@ public class DBConnection {
     private String portNumber = "3306";
     private String tableName = "testpersonne";
 
-    // iL faut une base nommee testPersonne !
+    // iL faut une base nommee testpersonne !
     private static String dbName = "testpersonne";
     private static Connection instance;
 
@@ -19,6 +19,7 @@ public class DBConnection {
     private DBConnection() throws SQLException {
         Properties connectionProps = new Properties();
         connectionProps.put("user", userName);
+
         connectionProps.put("password", password);
         String urlDB = "jdbc:mysql://" + serverName + ":";
         urlDB += portNumber + "/" + dbName;
