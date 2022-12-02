@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.sql.Array;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import Exception.RealisateurAbsentException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -15,7 +16,7 @@ public class TestFilm {
     Film testfilm2;
 
     @BeforeEach
-    public void init() throws SQLException, throws RealisateurAbsentException {
+    public void init() throws SQLException, RealisateurAbsentException {
         Personne.createTable();
         Film.createTable();
         testreal = new Personne("per", "sonne");
@@ -32,12 +33,22 @@ public class TestFilm {
     }
 
     @Test
-    public void testsave() throws SQLException
-    {
-        testfilm2 = new Film("titfilm", )
+    public void testsave() throws SQLException, RealisateurAbsentException {
+        testfilm2 = new Film("titfilm", testreal);
         testfilm2.save();
+        Film resultfilm = Film.findById(2);
+        assertEquals(testfilm2, resultfilm);
     }
-    
+
+    @Test
+    public void testupdate() throws SQLException, RealisateurAbsentException {
+        testfilm1 = new Film("titfilm", Personne.findById(1));
+        testfilm1.save();
+        Film resultfilm = Film.findById(2);
+        assertEquals(testfilm1, resultfilm);
+    }
+
+
     @AfterEach
     public void enddelete() throws SQLException
     {
