@@ -15,8 +15,9 @@ public class TestFilm {
     Film testfilm2;
 
     @BeforeEach
-    public void init() throws SQLException
-    {
+    public void init() throws SQLException, throws RealisateurAbsentException {
+        Personne.createTable();
+        Film.createTable();
         testreal = new Personne("per", "sonne");
         testreal.save();
         testfilm1 = new Film("titfilm", testreal);
@@ -31,13 +32,21 @@ public class TestFilm {
     }
 
     @Test
-    public void testgetreal() throws SQLException
+    public void testsave() throws SQLException
     {
-
-        Personne realfilm = testfilm1.getRealisateur();
-        assertEquals();
+        testfilm2 = new Film("titfilm", )
+        testfilm2.save();
+    }
+    
+    @AfterEach
+    public void enddelete() throws SQLException
+    {
+        Film.deleteTable();
+        Personne.deleteTable();
     }
 
-    
+
+
+
 
 }
