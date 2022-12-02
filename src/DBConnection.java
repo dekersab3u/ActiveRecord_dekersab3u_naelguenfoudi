@@ -25,8 +25,14 @@ public class DBConnection {
         urlDB += portNumber + "/" + dbName;
         instance = DriverManager.getConnection(urlDB, connectionProps);
     }
-    public static synchronized Connection getConnection() throws SQLException {
-        if(instance==null) new DBConnection();
+    public static synchronized Connection getConnection()  {
+        if(instance==null) {
+            try {
+                new DBConnection();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
             return instance;
     }
 
