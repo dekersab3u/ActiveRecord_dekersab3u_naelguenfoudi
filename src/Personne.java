@@ -14,7 +14,7 @@ public class Personne {
      */
     private static Connection connect=DBConnection.getConnection();
 
-    public Personne(String prenom, String nom) throws SQLException {
+    public Personne(String prenom, String nom)  {
         this.prenom = prenom;
         this.nom = nom;
         this.id = -1;
@@ -48,19 +48,22 @@ public class Personne {
      * @throws SQLException
      */
     public static Personne findById(int id) throws SQLException {
+
         Personne personne = null;
-        String SQLPrep = "SELECT * FROM Personne WHERE id=?;";
-        PreparedStatement prep1 = connect.prepareStatement(SQLPrep);
-        prep1.setInt(1, id);
-        prep1.execute();
-        ResultSet rs = prep1.getResultSet();
-        // s'il y a un resultat
-        if (rs.next()) {
-            String nom = rs.getString("nom");
-            String prenom = rs.getString("prenom");
-            id = rs.getInt("id");
-            personne = new Personne(prenom, nom);
-            personne.id = id;
+        if(id!=-1) {
+            String SQLPrep = "SELECT * FROM Personne WHERE id=?;";
+            PreparedStatement prep1 = connect.prepareStatement(SQLPrep);
+            prep1.setInt(1, id);
+            prep1.execute();
+            ResultSet rs = prep1.getResultSet();
+            // s'il y a un resultat
+            if (rs.next()) {
+                String nom = rs.getString("nom");
+                String prenom = rs.getString("prenom");
+                id = rs.getInt("id");
+                personne = new Personne(prenom, nom);
+                personne.id = id;
+            }
         }
         return personne;
 
